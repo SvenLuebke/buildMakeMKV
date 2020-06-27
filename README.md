@@ -12,3 +12,8 @@ If you wish to overwrite/reinstall an actual version of makemkv, use option --fo
 If you want to generate a new keyfile only, use options --force --keyonly:
 
 ./buildMakeMkv.sh --force --keyonly
+
+### Improvements
+
+* compatible to LibreELEC
+* fixed some small issues
