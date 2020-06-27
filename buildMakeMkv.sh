@@ -1,7 +1,11 @@
 #!/bin/sh
 
-cd /tmp/
-wget "http://www.makemkv.com/download/"
+PATH_WORK=/tmp/makeMKVdownload
+
+mkdir -p $PATH_WORK
+cd $PATH_WORK
+
+wget -O index.html "https://www.makemkv.com/download/"
 
 if [ $? != 0 ]; then
     echo "Makemkv webserver not responding, giving up..."
@@ -22,8 +26,8 @@ if [ -e $HOME/.MakeMKV/$curr_version ] && [ "$1" != "--force" ]; then
     exit 0
 fi
 
-wget "http://www.makemkv.com/forum2/viewtopic.php?f=5&t=1053"
-key=`grep -Po '(?<=<code>).*?(?=<\/code>)' viewtopic.php\?f\=5\&t\=1053`
+wget -O viewtopic.php "https://www.makemkv.com/forum/viewtopic.php?f=5&t=1053"
+key=$(grep -oE '<pre><code>.*</code>' $PATH_WORK/viewtopic.php | sed -n 's/<[^>]*>//g; p }')
 echo "Getting new key: $key"
 echo "Generate new key file"
 
